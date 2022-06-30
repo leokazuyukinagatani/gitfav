@@ -117,10 +117,11 @@ header h1 {
   background-color: #a3eeff;
 }
 
+
+
 table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 1rem 2rem -1rem rgba(0,0,0,0.3);
 }
 
 
@@ -142,17 +143,38 @@ table th {
   padding: 1.5rem;
 }
 
+
+
 table th:first-child {
-  border-top-left-radius: .4rem;
+  border-top-left-radius: 1.3rem;
 }
 
 table th:last-child {
-  border-top-right-radius: .4rem;
+  border-top-right-radius: 1.3rem;
 }
 
 table td {
   padding: 1.5rem;
   text-align: left;
+}
+
+table td.empt-list {
+  text-align: center;
+  padding: 17rem;
+}
+
+.container-empt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+table td.empt-list span {
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 2.5rem;
+  color: rgba(78, 84, 85, 1);
 }
 
 table tr { 

@@ -58,6 +58,7 @@ export class FavoritesView extends Favorites {
 
     this.update();
     this.onadd();
+ 
   }
 
   onadd() {
@@ -71,36 +72,59 @@ export class FavoritesView extends Favorites {
   update() {
     this.removeAllTr();
 
-    this.entries.forEach( user => {
-      const row = this.createRow();
+    if(this.entries != ""){
+      this.entries.forEach( user => {
+        const row = this.createRow();
+        
+        row.querySelector('.user img').src = `https://github.com/${user.login}.png`;
+        
+        row.querySelector('.user img').alt = `Imagem de ${user.name}`;
+  
+        row.querySelector('.user a').href = `https://github.com/${user.login}`;
+  
+        row.querySelector('.user p').textContent = user.name;
+        
+        row.querySelector('.user span').textContent = user.login;
+  
+        row.querySelector('.repositories').textContent = user.public_repos;
+  
+        row.querySelector('.followers').textContent = user.followers;
+  
+        row.querySelector('.remove').onclick = () => {
+          const isOk = confirm("Tem certeza que deseja deletar este usuário?");
+          if(isOk) {
+            this.delete(user);
+          }
+        };
       
-      row.querySelector('.user img').src = `https://github.com/${user.login}.png`;
+        this.tbody.append(row);
       
-      row.querySelector('.user img').alt = `Imagem de ${user.name}`;
-
-      row.querySelector('.user a').href = `https://github.com/${user.login}`;
-
-      row.querySelector('.user p').textContent = user.name;
-      
-      row.querySelector('.user span').textContent = user.login;
-
-      row.querySelector('.repositories').textContent = user.public_repos;
-
-      row.querySelector('.followers').textContent = user.followers;
-
-      row.querySelector('.remove').onclick = () => {
-        const isOk = confirm("Tem certeza que deseja deletar este usuário?");
-        if(isOk) {
-          this.delete(user);
-        }
-      };
-
-      this.tbody.append(row);
-
-    });
+  
+      });
+    }else {
+      const emptRow = this.createEmptRow();
+      this.tbody.append(emptRow);
+    }
+   
 
   }
 
+
+  createEmptRow() {
+    const tr = document.createElement('tr');
+
+    tr.innerHTML= `
+      <td class="empt-list" colspan="4">
+        <div class="container-empt">
+          <img src="images/Estrela.svg">
+          <span>Nenhum favorito ainda</span>
+        </div>
+      </td>
+
+    `;
+
+    return tr;
+  }
   createRow() {
     const tr = document.createElement('tr');
 
